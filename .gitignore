@@ -1,0 +1,27 @@
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Test and tool caches
+.pytest_cache/
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# Generated data and results
+data/processed/
+data/raw_pdfs/*.pdf
+results/
+
+# Local environment files
+.idea/
+.vscode/

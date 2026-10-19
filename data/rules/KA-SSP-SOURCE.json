@@ -1,0 +1,200 @@
+{
+  "scheme_id": "KA-SSP-SOURCE",
+  "scheme_name": "Karnataka SSP Eligibility and Document Requirements (multi-department scheme table)",
+  "verified": false,
+  "criteria": [
+    {
+      "id": "c1",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 100000,
+      "text": "Category-1 annual income less than or equal to 1 LPA [KA-SSP-SOURCE:p5:s4]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p5:s4"
+      ],
+      "group": null
+    },
+    {
+      "id": "c2",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 50,
+      "text": "Category-1: min 50% [KA-SSP-SOURCE:p6:s1]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p6:s1"
+      ],
+      "group": null
+    },
+    {
+      "id": "c3",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 60,
+      "text": "Other OBC’s Categories: min 60% [KA-SSP-SOURCE:p6:s2]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p6:s2"
+      ],
+      "group": null
+    },
+    {
+      "id": "c4",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 55,
+      "text": "Category-1: min 55% [KA-SSP-SOURCE:p7:s2]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p7:s2"
+      ],
+      "group": null
+    },
+    {
+      "id": "c5",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 65,
+      "text": "Other OBC’s Categories: min 65% [KA-SSP-SOURCE:p7:s3]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p7:s3"
+      ],
+      "group": null
+    },
+    {
+      "id": "c6",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 60,
+      "text": "Category-1: min 60% [KA-SSP-SOURCE:p8:s3]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p8:s3"
+      ],
+      "group": null
+    },
+    {
+      "id": "c7",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 70,
+      "text": "Other OBC’s Categories: min 70% [KA-SSP-SOURCE:p8:s3]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p8:s3"
+      ],
+      "group": null
+    },
+    {
+      "id": "c8",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 250000,
+      "text": "Postmatric Less Than or equal to 2.5 LPA for MCM Courses [KA-SSP-SOURCE:p9:s6]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p9:s6"
+      ],
+      "group": null
+    },
+    {
+      "id": "c9",
+      "field": "previous_marks_percent",
+      "op": ">=",
+      "value": 50,
+      "text": "Students should have scored minimum 50% in previous year [KA-SSP-SOURCE:p9:s13]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p9:s13"
+      ],
+      "group": null
+    },
+    {
+      "id": "c10",
+      "field": "domicile_state",
+      "op": "==",
+      "value": "Karnataka",
+      "text": "resident of Karnataka [KA-SSP-SOURCE:p10:s4]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p10:s4"
+      ],
+      "group": null
+    },
+    {
+      "id": "c11",
+      "field": "annual_family_income",
+      "op": ">",
+      "value": 250000,
+      "text": "Family annual Income Above 2.5 LPA [KA-SSP-SOURCE:p10:s9]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p10:s9"
+      ],
+      "group": "g1"
+    },
+    {
+      "id": "c12",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 1000000,
+      "text": "Family annual Income Below 10 LPA [KA-SSP-SOURCE:p10:s9]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p10:s9"
+      ],
+      "group": "g1"
+    },
+    {
+      "id": "c13",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 800000,
+      "text": "vಾರ್ಷಿಕ ಆದಾಯ 8 ಲಕ್ಷದ ಒಳಗೆ ಇರಬೇಕು [KA-SSP-SOURCE:p21:s8]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p21:s8"
+      ],
+      "group": null
+    },
+    {
+      "id": "c14",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 100000,
+      "text": "ವಾರ್ಷಿಕ ಆದಾಯ 1 ಲಕ್ಷದ ಒಳಗೆ ಇರಬೇಕು [KA-SSP-SOURCE:p22:s7]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p22:s7"
+      ],
+      "group": null
+    },
+    {
+      "id": "c15",
+      "field": "annual_family_income",
+      "op": "<",
+      "value": 250000,
+      "text": "Income should be <Rs 250000 [KA-SSP-SOURCE:p26:s6]",
+      "source_sids": [
+        "KA-SSP-SOURCE:p26:s6"
+      ],
+      "group": null
+    }
+  ],
+  "unmapped_clauses": [
+    "[KA-SSP-SOURCE:p3:s9] Management seat type applications are not eligible",
+    "[KA-SSP-SOURCE:p6:s3] Management seat type applications are not eligible) students who are not eligible for postmatric (PM yasasvi).",
+    "[KA-SSP-SOURCE:p8:s4] In all OBC Scholarship schemes, Students who are studying in Management, private seats in private colleges and COMED-K are not eligible to get the scholarship.",
+    "[KA-SSP-SOURCE:p8:s6] The student studying in the Residential college is not eligible.",
+    "[KA-SSP-SOURCE:p9:s13] and Student should pass in all subjects (should not have Backlogs)",
+    "[KA-SSP-SOURCE:p10:s5] Residential college is not eligible.",
+    "[KA-SSP-SOURCE:p13:s8] Students who have received scholarship from another department will not be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p13:s11] Student must be a holder of BPL card.",
+    "[KA-SSP-SOURCE:p16:s4] Students who have received scholarship from another department will also be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p19:s1] Students who have received scholarship from another department will also be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p19:s5] Students who have received scholarship from other department will not be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p20:s3] Students who have received scholarship from other department will not be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p21:s2] scholarship from another department will also be eligible for this scheme.",
+    "[KA-SSP-SOURCE:p21:s9] (Comed-k & Managemnt seats are not eligible)",
+    "[KA-SSP-SOURCE:p23:s4] (Comed-k & Managemnt seats are not eligible)",
+    "[KA-SSP-SOURCE:p24:s2] Students who are specially / differently abled and who are not eligible to avail scholarship schemes disbursed by other welfare departments.",
+    "[KA-SSP-SOURCE:p24:s6] Must be a child of those involved in any building construction work.",
+    "[KA-SSP-SOURCE:p25:s1] (Only 2 children per family would be eligible",
+    "[KA-SSP-SOURCE:p26:s2] Student should belong to an agricultural family and someone in that family must have agricultural land in one's name and the family data must be in KUTUMBA portal and they should have a FRUITS-ID with land.",
+    "[KA-SSP-SOURCE:p26:s5] Children of landless agricultural labourers who are engaged in agricultural labour activity and should have a job card in the name of the student's father or mother are eligible for this scheme.",
+    "[KA-SSP-SOURCE:p28:s2] If the student receives a scholarship from any other department, then the Agriculture Department's scholarship will not be provided.",
+    "[KA-SSP-SOURCE:p28:s8] Student should be a child of Nekara Handloom/ Power loom weaver who is enrolled in handloom/powerloom sector database",
+    "[KA-SSP-SOURCE:p29:s2] If the student receives a scholarship from any other department, then the Handlooms and Textiles Department's scholarship will not be provided.",
+    "[KA-SSP-SOURCE:p29:s10] Student should be a child of Taxi/ Auto/Cab driver who is enrolled as a driver in Transport Department Database (through Seva Sindhu)",
+    "[KA-SSP-SOURCE:p30:s7] A student should be the child of a worker who is involved in any of the fishing occupations",
+    "[KA-SSP-SOURCE:p31:s2] If the student receives a scholarship from any other department, then the Fisheries Department's scholarship will not be provided."
+  ]
+}

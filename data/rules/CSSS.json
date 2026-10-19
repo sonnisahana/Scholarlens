@@ -1,0 +1,49 @@
+{
+  "scheme_id": "CSSS",
+  "scheme_name": "PM-USP Central Sector Scheme of Scholarship for College and University Students",
+  "verified": false,
+  "criteria": [
+    {
+      "id": "c1",
+      "field": "annual_family_income",
+      "op": "<=",
+      "value": 450000,
+      "text": "[CSSS:p2:s4] Students with gross parental/family income upto Rs 450000 per annum are eligible for scholarship under the scheme.",
+      "source_sids": [
+        "CSSS:p2:s4"
+      ],
+      "group": null
+    }
+  ],
+  "unmapped_clauses": [
+    "[CSSS:p1:s3] The scholarships are awarded by Ministry of Education, Government of India on the basis of results of Higher Secondary / Class XII Board Examination.",
+    "[CSSS:p1:s4] A maximum of 82,000 fresh scholarships per annum are provided for pursuing graduate / postgraduate degree in colleges and universities and for professional courses, such as Medical, Engineering etc.",
+    "[CSSS:p1:s5] The total number of scholarships are divided amongst the State Education Boards based on the State’s population in the age group of 18-25 years, after segregating share of CBSE and ICSE on the basis of number of students passing out from various Boards in the country.",
+    "[CSSS:p1:s6] 50% of the scholarships are earmarked for girls.",
+    "[CSSS:p1:s7] Out of the total scholarship slots earmarked for UTs of Jammu & Kashmir and Ladakh, 3% slots shall be earmarked for the students from the UT of Ladakh.",
+    "[CSSS:p1:s9] In case of shortfall in the number of applications, the scholarship slots shall be interoperable among categories (Gen, OBC, SC & ST), gender (Female, Male) and State Quota to maximize use of slots for fresh scholarships with effect from academic year 2022-23, subject to the condition that guidelines of Ministry of Finance and NITI Aayog regarding SC/ST fund allocation of the schemes are adhered to.",
+    "[CSSS:p1:s10] Students who are above 80th percentile of successful candidates in the relevant stream from the respective Board of Examination in Class XII of 10+2 pattern or equivalent;",
+    "[CSSS:p2:s1] Pursuing regular degree courses and not correspondence or distance mode or pursuing Diploma courses;",
+    "[CSSS:p2:s2] Pursuing courses at colleges/institutions recognized by All India Council for Technical Education and respective Regulatory Bodies concerned;",
+    "[CSSS:p2:s3] Not availing benefit of any other scholarship schemes including State run scholarship schemes/ fee waiver & reimbursement scheme;",
+    "[CSSS:p2:s5] Income certificate will be required only for the fresh applicants;",
+    "[CSSS:p2:s6] Student changing his/ her college/institute of study will be allowed to continue/renew the scholarship provided the course of study and the institution is having valid AISHE Code;",
+    "[CSSS:p2:s7] The AISHE code can be checked in the portal https://aishe.gov.in/aishe/aisheCode vii.",
+    "[CSSS:p2:s8] Students who missed to apply for renewal of application online on NSP will be allowed to apply for renewal of scholarship for subsequent year on NSP, if he/she fulfils eligibility condition for renewal;",
+    "[CSSS:p2:s9] For renewal of scholarship in each year of study, besides getting at least 50% marks in the Annual Examination, maintenance of adequate attendance of at least 75%, will also be the criteria.",
+    "[CSSS:p2:s10] Complaints against the student regarding any in disciplined or criminal behaviour including any complaints of having indulged in ragging, will lead to forfeiture of scholarship;",
+    "[CSSS:p2:s11] Beneficiaries/ Applicants under the scheme must apply online in the National Scholarships Portal (www.scholarships.gov.in) for the fresh/ renewal scholarships.",
+    "[CSSS:p2:s12] Fresh/Renewal applications sent directly to the Ministry of Education shall not be accepted.",
+    "[CSSS:p2:s13] Students belonging to reserved categories/weaker sections /minorities etc. are eligible to get benefit of reservation on the basis of merit, subject to Central Reservation Policy [i.e. 15% seats are earmarked for SCs, 7.5% for STs and 27% for OBCs and 5% horizontal reservation for Persons with Disabilities (PwDs) in all the categories].",
+    "[CSSS:p2:s15] If slots under a specific group is not filled after considering all the States/UTs, the vacant slots will be allocated to other categories so that maximum number of eligible students can get the benefit, subject to overall ceiling of slots.",
+    "[CSSS:p3:s1] The applications are received online only.",
+    "[CSSS:p3:s2] Verification of credentials of the students like caste, educational qualifications etc.",
+    "[CSSS:p3:s7] Online applications will be verified at two levels i.e by the Institute, where the student is studying and thereafter by the concerned State Higher Education Department or any other Agency/ Official nominated by the State as State Nodal Agency (both for fresh and renewal applicants).",
+    "[CSSS:p3:s9] Students will not be permanently debarred for scholarships due to delay to renew or verification.",
+    "[CSSS:p3:s11] Renewal for that year will not be allowed if an applicant misses this deadline.",
+    "[CSSS:p3:s12] Rate and Duration of Scholarship (from financial year 2022-23) The rate of scholarship is Rs 12000/-per annum at Graduation level for first three years of College and University courses and Rs 20000/-per annum at Post- Graduation level.",
+    "[CSSS:p3:s13] Students pursuing professional courses, in case, where the duration of course is five (5) years/Integrated course will get Rs 20000/-per annum in the 4th and 5th year.",
+    "[CSSS:p3:s14] However, students pursuing technical courses such as B.Tech, B.Engg. will get scholarship up to graduation level only i.e. Rs 12000 p.a. for 1st, 2nd and 3rd year and Rs 20000 in the 4th year.",
+    "[CSSS:p4:s5] INO/SNO should be a regular employee."
+  ]
+}

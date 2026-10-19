@@ -1,0 +1,15 @@
+{
+  "_comment": "Files starting with '_' are ignored. Copy this shape; build_rules.py drafts these for you.",
+  "scheme_id": "EXAMPLE",
+  "scheme_name": "Example Scholarship",
+  "verified": false,
+  "criteria": [
+    {"id": "c1", "field": "annual_family_income", "op": "<=", "value": 250000,
+     "text": "Annual family income must not exceed Rs 250000.",
+     "source_sids": ["EXAMPLE:p2:s7"], "group": null},
+    {"id": "c2", "field": "category", "op": "in", "value": ["SC", "ST"],
+     "text": "Open to Scheduled Caste and Scheduled Tribe students.",
+     "source_sids": ["EXAMPLE:p1:s3"], "group": null}
+  ],
+  "unmapped_clauses": []
+}
