@@ -1,1 +1,10 @@
-{"TEMPLATE": true, "qid": "Q001", "query": "income limit for post matric scholarship", "scheme_id": "REPLACE-SCHEME-ID", "relevant_sids": ["REPLACE-SCHEME-ID:p2:s5"]}
+{"TEMPLATE": false, "qid": "Q001", "query": "What is the annual family income limit for CSSS?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s4"]}
+{"TEMPLATE": false, "qid": "Q002", "query": "Who qualifies academically for the Central Sector Scholarship?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p1:s10"]}
+{"TEMPLATE": false, "qid": "Q003", "query": "Can students studying through distance education or diploma courses apply?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s1"]}
+{"TEMPLATE": false, "qid": "Q004", "query": "Can I receive CSSS while getting another scholarship or fee waiver?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s3"]}
+{"TEMPLATE": false, "qid": "Q005", "query": "How many fresh scholarships are offered each year?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p1:s4"]}
+{"TEMPLATE": false, "qid": "Q006", "query": "What percentage of CSSS scholarships is reserved for girls?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p1:s6"]}
+{"TEMPLATE": false, "qid": "Q007", "query": "What marks and attendance are required for scholarship renewal?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s9"]}
+{"TEMPLATE": false, "qid": "Q008", "query": "Where must applicants submit fresh and renewal applications?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s11", "CSSS:p2:s12"]}
+{"TEMPLATE": false, "qid": "Q009", "query": "Is an income certificate required for scholarship renewal?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s5"]}
+{"TEMPLATE": false, "qid": "Q010", "query": "Can a student change colleges and continue the scholarship?", "scheme_id": "CSSS", "relevant_sids": ["CSSS:p2:s6"]}

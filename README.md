@@ -1,21 +1,20 @@
+
 # ScholarLens — Grounded RAG Assistant for Scholarships
 
-ScholarLens is a Python-based research prototype that helps students explore scholarship schemes using natural-language questions. It focuses on Karnataka State Scholarship Portal (SSP) material and selected central scholarship schemes.
+ScholarLens is a Python-based retrieval-augmented generation (RAG) assistant designed to help students explore scholarship information, understand eligibility requirements, and locate supporting evidence in scholarship documents.
 
-The goal is to make scholarship information easier to understand by combining document retrieval, rule-based eligibility checks, language-model explanations, source citations, and claim verification.
+The project combines document ingestion, retrieval, evidence-grounded responses, structured eligibility evaluation, and optional claim verification. It is an academic prototype, not an official scholarship decision system.
 
-> **Disclaimer:** ScholarLens is an informational prototype, not an official scholarship eligibility decision system. Scheme availability, eligibility requirements, income limits, deadlines, and other conditions must be confirmed against the latest official notifications.
+## Features
 
-## Key Features
-
-- **Natural-language queries:** Ask questions about scholarships and eligibility in English, Kannada, or mixed-language phrasing.
-- **Document ingestion:** Extract sentence-level text from scholarship PDFs, with OCR support for scanned documents when configured.
-- **Hybrid retrieval:** Retrieve relevant passages using lexical and dense retrieval, with reranking when enabled.
-- **Rule-based eligibility:** Apply structured scholarship rules to profile information rather than delegating eligibility decisions entirely to an LLM.
-- **Grounded generation:** Generate explanations using retrieved evidence and sentence-level source identifiers.
+- **Document ingestion:** Extract text from PDF scholarship documents using PyMuPDF, with optional OCR support.
+- **Retrieval comparison:** Compare TF-IDF, BM25, dense semantic retrieval, hybrid retrieval, and hybrid retrieval with reranking.
+- **Evidence-grounded answers:** Retrieve relevant document passages to support generated responses.
+- **Eligibility evaluation:** Support structured scholarship eligibility checks and profile-based evaluation.
 - **Claim verification:** Check citations, numerical consistency, and textual entailment when the relevant verifier is enabled.
 - **Scheme catalogue:** Read Karnataka SSP entries from a master registry.
-- **Evaluation tools:** Support retrieval, extraction, eligibility, and groundedness evaluation.
+- **Evaluation tools:** Evaluate retrieval, profile extraction, eligibility decisions, and groundedness.
+- **Automated testing:** Run unit tests locally and through GitHub Actions.
 
 ## Architecture
 
@@ -26,7 +25,11 @@ Student question
 Profile extraction / intent detection
        |
        v
-Retrieval and structured rule evaluation
+Document retrieval
+(TF-IDF / BM25 / Dense / Hybrid)
+       |
+       v
+Optional reranking
        |
        v
 Evidence-grounded answer generation
@@ -35,57 +38,48 @@ Evidence-grounded answer generation
 Citation and claim verification
        |
        v
-Answer with supporting sources
+Answer with supporting evidence
 ```
 
-The rule engine evaluates structured eligibility conditions. Retrieval supplies relevant document passages, and the LLM explains the evidence. The verifier checks claims against cited text; it does not guarantee that the underlying documents or rules are current or correct.
-
-A source identifier may look like:
-
-```text
-SCHEME-ID:p4:s12
-```
-
-This represents a scheme or document identifier, page 4, sentence 12. The exact identifier format depends on the ingested document.
+The exact path depends on the configured provider, enabled components, and question type.
 
 ## Technology Stack
 
-- Python 3.10+
+- Python
 - Streamlit
-- PyMuPDF and Tesseract OCR
-- BM25 and dense retrieval
-- Sentence Transformers and scikit-learn
-- Gemini API through `google-genai`
-- Optional Anthropic API or local Ollama integration
+- PyMuPDF
+- scikit-learn
+- BM25 retrieval
+- Sentence Transformers
+- Google Gemini through `google-genai`
+- Optional Anthropic or Ollama integrations
 - Pytest
+- GitHub Actions
+
+Availability of individual features depends on installed dependencies, model downloads, and configuration.
 
 ## Project Structure
 
 ```text
 scholarlens/
-├── app/
-│   └── streamlit_app.py
+├── .github/
+│   └── workflows/
+│       └── tests.yml
 ├── data/
 │   ├── gold_set/
-│   ├── rules/
-│   ├── raw_pdfs/
 │   ├── processed/
-│   ├── schemes_registry.csv
-│   └── schemes_registry_master.csv
+│   └── raw/
 ├── src/
 │   └── scholarlens/
 │       ├── config.py
-│       ├── ingest.py
+│       ├── evaluate.py
 │       ├── retrieval.py
-│       ├── llm.py
-│       ├── profile.py
-│       ├── rules.py
-│       ├── build_rules.py
-│       ├── generate.py
-│       ├── verify.py
-│       ├── pipeline.py
-│       └── evaluate.py
+│       ├── utils.py
+│       └── ...
 ├── tests/
+├── app/
+│   └── streamlit_app.py
+├── results/
 ├── .env.example
 ├── .gitignore
 ├── pyproject.toml
@@ -93,196 +87,181 @@ scholarlens/
 └── README.md
 ```
 
-Generated processed data, local caches, results, virtual environments, and source PDF files are excluded from version control by default. You may need to obtain the appropriate source documents and regenerate processed files locally.
+Some directories and files are generated locally or may not be present until the corresponding pipeline stage is run.
 
-## 1. Prerequisites
-
-Install:
+## Requirements
 
 - Python 3.10 or later
 - Git
-- An internet connection for package installation, model downloads, and API use
-- An API key for the selected hosted LLM provider, or a configured local Ollama model
+- Internet access for dependency installation and model downloads
+- An API key for the selected hosted language model, if required
+- Sufficient RAM and disk space for the selected embedding and reranking models
 
-For scanned PDFs, install the Tesseract OCR executable separately and ensure it is accessible to the application. Kannada OCR additionally requires the appropriate Kannada language data.
+## Installation
 
-## 2. Installation
+Clone the repository:
 
-Run these commands from the project root.
+```bash
+git clone https://github.com/sonnisahana/Scholarlens.git
+cd Scholarlens
+```
+
+Create and activate a virtual environment.
 
 ### Windows PowerShell
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install -e .
 ```
 
-### macOS or Linux
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install -e .
-```
-
-## 3. Configure the LLM
-
-Create a local environment file from the example:
+Install the dependencies:
 
 ```powershell
-Copy-Item .env.example .env
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .
 ```
 
-Open `.env` and configure the provider and model.
+If PowerShell blocks virtual-environment activation, use the Python executable directly:
 
-Example for Gemini:
-
-```dotenv
-LLM_PROVIDER=gemini
-GEMINI_API_KEY=your_actual_api_key
-LLM_MODEL=gemini-3.5-flash
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Use a model identifier supported by your API account and the installed SDK.
+## Configuration
 
-Other supported configurations include Anthropic and Ollama, subject to the application's implementation and the dependencies installed for the selected provider.
+Create a local `.env` file using `.env.example` as a reference.
 
-**Security:** Never commit `.env`, API keys, tokens, or other credentials. `.env.example` should contain placeholders only.
+Configure the provider and model settings supported by the current implementation. For hosted providers, add the required API key to your local `.env` file.
 
-## 4. Prepare the Data
+**Never commit `.env` or expose API keys in source code, screenshots, logs, or public repositories.** The `.env.example` file should contain placeholders only.
 
-The project uses two registries:
+Keep provider names and model identifiers consistent with those supported by the installed SDK and project configuration.
 
-- `data/schemes_registry.csv`: the source registry used by the ingestion pipeline.
-- `data/schemes_registry_master.csv`: the master catalogue used by catalogue queries.
+## Prepare the Corpus
 
-Review registry entries and confirm the source, scheme name, issuing authority, applicable academic year, and official notification before relying on them.
-
-Obtain official scholarship guidelines from the relevant government portals or department websites. Check document permissions and licensing before redistributing PDFs.
-
-### Ingest documents
-
-Place the required source PDFs under `data/raw_pdfs/`, following the filenames expected by the registry, then run:
+Place the scholarship documents in the expected raw-data directory and run the ingestion stage:
 
 ```powershell
 python -m scholarlens.ingest
 ```
 
-The pipeline generates processed sentence-level and chunk-level data under `data/processed/`.
+The ingestion pipeline creates processed data, including chunks and sentence-level records used by retrieval and evaluation.
 
-Inspect the extracted text carefully, particularly for scanned documents, multilingual tables, multi-column layouts, and OCR errors. Poor extraction can lead to incorrect retrieval and answers.
+Check the project configuration for the exact input paths, output locations, and document formats supported by the current version.
 
-### Build structured rules
+## Run the Application
 
-Run:
-
-```powershell
-python -m scholarlens.build_rules
-```
-
-Review generated rules against the original official documents. Correct inaccurate values, eligibility conditions, exclusions, and source references before marking a rule as verified.
-
-Do not treat automatically generated rules as ground truth until they have been independently checked.
-
-## 5. Run ScholarLens
-
-### Command-line query
-
-```powershell
-python -m scholarlens.pipeline "What scholarships are available for SC students in Karnataka?"
-```
-
-Another example:
-
-```powershell
-python -m scholarlens.pipeline "What is the income limit for SC scholarships?"
-```
-
-An answer may be unavailable when the indexed evidence does not support the requested information. This is preferable to inventing an unsupported threshold.
-
-### Streamlit interface
+Launch the Streamlit application:
 
 ```powershell
 streamlit run app/streamlit_app.py
 ```
 
-Streamlit will display a local URL in the terminal. Open it in your browser to interact with the application.
+Open the local URL printed by Streamlit in your browser.
 
-The first run may download embedding, reranking, or verification models, depending on the configuration. Model downloads require internet access and sufficient disk space and memory.
+The available features depend on the local corpus, configured language model, installed dependencies, and enabled verification components.
 
-## 6. Run Tests
+## Run Tests
 
-Run the test suite:
+Run the automated test suite from the project root:
 
 ```powershell
 python -m pytest -q
 ```
 
-The current baseline is **15 passing tests** in the local development environment. Test coverage and results may change as the project evolves.
+**Development baseline:** 15 tests passed in the previously recorded local run. Re-run the command after changes to verify the current state.
 
-Tests passing does not establish that every scholarship entry is current, that OCR is error-free, or that every answer is factually correct.
+GitHub Actions is configured to run tests when changes are pushed to the main branch or a pull request targets it.
 
-## 7. Evaluation
+Passing tests verifies the tested behaviours; it does not establish that every scholarship condition is current or that all generated answers are factually correct.
 
-The repository includes evaluation utilities and example gold-set files.
+## Evaluation
 
-Example commands:
+ScholarLens includes evaluation utilities for retrieval, extraction, eligibility, and groundedness.
+
+### Retrieval pilot
+
+A preliminary retrieval comparison was conducted using 10 queries for the PM-USP Central Sector Scheme of Scholarship for College and University Students (CSSS).
+
+Run the retrieval evaluation with:
 
 ```powershell
-python -m scholarlens.evaluate --task retrieval
+python -m scholarlens.evaluate --task retrieval --limit 10
+```
+
+### Preliminary results
+
+| Retrieval method | Recall@1 | Recall@3 | Recall@5 | MRR | nDCG@1 | nDCG@3 | nDCG@5 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| TF-IDF | 0.600 | 0.900 | 1.000 | 0.753 | 0.600 | 0.776 | 0.815 |
+| BM25 | 0.600 | 0.800 | 0.900 | 0.725 | 0.600 | 0.688 | 0.754 |
+| Dense | 0.600 | 0.800 | 1.000 | 0.728 | 0.600 | 0.674 | 0.783 |
+| Hybrid | 0.700 | 1.000 | 1.000 | 0.817 | 0.700 | 0.824 | 0.848 |
+| Hybrid + reranking | 0.800 | 1.000 | 1.000 | 0.900 | 0.800 | 0.926 | 0.926 |
+
+In this pilot, hybrid retrieval with reranking achieved the highest scores across all reported metrics. The results suggest that combining retrieval methods and reranking may improve the ordering of relevant evidence for this query set.
+
+### Metric definitions
+
+- **Recall@k:** Fraction of gold-relevant sentence IDs retrieved within the top k results.
+- **MRR (Mean Reciprocal Rank):** Average reciprocal rank of the first relevant result.
+- **nDCG@k:** Ranking-quality metric that gives greater weight to relevant results appearing earlier.
+
+### Evaluation limitations
+
+This is a **10-query pilot covering one scholarship scheme**, not a comprehensive benchmark. The gold labels were constructed for initial pipeline evaluation and have not undergone independent annotation or validation.
+
+The scores should therefore be treated as preliminary engineering results, not as evidence of general performance across scholarship documents or student populations. A stronger research evaluation would require more queries across multiple schemes, independently reviewed relevance labels, error analysis, and repeated reproducible experiments.
+
+### Other evaluation tasks
+
+The evaluation module also provides commands for other tasks:
+
+```powershell
 python -m scholarlens.evaluate --task extraction
 python -m scholarlens.evaluate --task eligibility
 python -m scholarlens.evaluate --task eligibility --oracle-profile
-python -m scholarlens.evaluate --task groundedness
-python -m scholarlens.evaluate --task all --limit 10
 ```
 
-Confirm the available task names and required data against the current implementation before running a full evaluation.
+Check the current implementation and required input files before running these tasks. Retrieval scores alone do not measure eligibility accuracy, answer groundedness, or the correctness of final scholarship advice.
 
-For a meaningful evaluation:
+Evaluation outputs are written under `results/` and are excluded from version control by default. The retrieval pilot metrics are documented above so they remain visible in the repository.
 
-1. Build a representative set of student profiles and information-seeking questions.
-2. Independently label expected eligibility outcomes using official documents.
-3. Record relevant source sentence identifiers for retrieval queries.
-4. Include borderline income values, missing information, conflicting conditions, out-of-scope queries, and Kannada or mixed-language inputs.
-5. Compare retrieval, extraction, eligibility, and groundedness performance.
-6. Manually audit incorrect answers and verifier decisions.
-7. Report the dataset, annotation process, metrics, and limitations transparently.
+## Limitations
 
-Keep generated evaluation outputs under `results/`. They are excluded from version control by default.
-
-## 8. Current Limitations
-
-- **Document currency:** Scholarship conditions can change between academic years. Current validity must be confirmed from official notifications.
-- **OCR and table extraction:** Complex layouts and mixed Kannada-English documents may be extracted incorrectly.
-- **Registry completeness:** The master registry is a catalogue source, not proof that every listed scheme is active or applicable.
-- **Rule quality:** Eligibility decisions depend on the accuracy and completeness of structured rules.
-- **Retrieval and verification:** Citation and entailment checks reduce some unsupported claims but cannot guarantee correctness.
-- **Model and hardware requirements:** Dense retrieval, reranking, and NLI verification may require model downloads and substantial memory.
-- **Language support:** Multilingual input does not guarantee equally accurate retrieval or generation across languages.
-- **Official decisions:** The application cannot replace the relevant scholarship authority's rules, verification, or final decision.
+- **Document currency:** Scholarship eligibility conditions, deadlines, and award amounts can change. Consult current official notifications.
+- **OCR and extraction:** Complex PDF layouts, tables, and multilingual text may be extracted incorrectly.
+- **Corpus completeness:** Results depend on the documents ingested into the system.
+- **Eligibility rules:** Decisions depend on the completeness and accuracy of the structured rules and user-provided information.
+- **Retrieval quality:** Relevant evidence may be missed or ranked incorrectly.
+- **Claim verification:** Verification can identify some unsupported claims but cannot guarantee factual correctness.
+- **Language support:** Multilingual input does not guarantee equal retrieval or generation accuracy across languages.
+- **Model requirements:** Embedding, reranking, and verification models may require downloads, memory, and computational resources.
+- **Official decisions:** ScholarLens is an academic prototype and does not replace official scholarship portals or decisions made by scholarship authorities.
 
 ## Roadmap
 
-- Improve scholarship metadata and document provenance.
-- Expand and independently validate the eligibility rule set.
-- Add regression tests for category filtering and unsupported eligibility questions.
-- Automate tests using GitHub Actions.
-- Package the application with Docker.
-- Evaluate retrieval and answer grounding against a manually validated gold set.
-- Deploy a demo with appropriate secrets management and resource limits.
+- Expand and independently validate the retrieval gold set across multiple schemes.
+- Improve document provenance, metadata, and source currency checks.
+- Expand eligibility rules and test borderline cases.
+- Evaluate extraction accuracy and groundedness against manually reviewed examples.
+- Add regression tests for unsupported and ambiguous eligibility questions.
+- Improve multilingual retrieval and document extraction.
+- Explore deployment with suitable resource limits and secrets management.
 
 ## Responsible Use
 
-Use official government notifications as the final authority for scholarship requirements. Do not enter unnecessary personal or sensitive information. Verify all consequential eligibility decisions with the relevant scholarship portal or department.
+Use ScholarLens to explore scholarship information and locate relevant source passages. Before acting on an eligibility result, verify the conditions, deadlines, and application process against the relevant official scholarship notification or portal.
+
+Do not treat generated answers as official decisions or submit sensitive personal information unless the deployment has appropriate privacy and security safeguards.
 
 ## License
 
-No license has been specified yet. Until a license is added, reuse and redistribution are not automatically permitted. Confirm the licensing of any source documents and third-party assets before publishing them.
+Add the applicable license before redistributing the project. Unless a license is included, reuse and redistribution permissions may be limited.
+
+---
+
+**Project:** ScholarLens  
+**Purpose:** Academic prototype for evidence-grounded scholarship information retrieval and assistance.
